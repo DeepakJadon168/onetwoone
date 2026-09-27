@@ -10,9 +10,10 @@ const app = express();
 
 // Allowed frontend origins
 const allowedOrigins = [
-  "https://onetoonerental.vercel.app",
+  "https://onetoonerental.vercel.app",   // purana Vercel URL (agar rakhna ho to)
+  "https://onetoonerental.onrender.com", // TODO: naya Render frontend URL yahan daalo (jo deploy hone ke baad milega)
   "http://localhost:3000",
-  "http://localhost:5173", // agar Vite use kar rahe ho
+  "http://localhost:5173", // Vite local dev
 ];
 
 app.use(
