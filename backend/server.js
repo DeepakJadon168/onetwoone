@@ -10,8 +10,8 @@ const app = express();
 
 // Allowed frontend origins
 const allowedOrigins = [
-  "https://onetoonerental.vercel.app",   // purana Vercel URL (agar rakhna ho to)
-  "https://onetoonerental.onrender.com", // TODO: naya Render frontend URL yahan daalo (jo deploy hone ke baad milega)
+  "https://onetwoonerental.onrender.com", // naya Render frontend URL
+  "https://onetoonerental.vercel.app",     // purana Vercel URL (rakhna ho to)
   "http://localhost:3000",
   "http://localhost:5173", // Vite local dev
 ];
@@ -19,7 +19,6 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (Postman, curl, mobile apps, server-to-server)
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
@@ -52,10 +51,6 @@ app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-// Only start a standalone listener when this file is run directly
-// (local dev with `node server.js` / `npm run dev`, or a host like Render/Railway).
-// On Vercel this file is imported as a serverless function handler instead,
-// so app.listen() must NOT run there.
 if (require.main === module) {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
