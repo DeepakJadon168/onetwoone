@@ -8,27 +8,11 @@ connectDB();
 
 const app = express();
 
-// Allowed frontend origins
-const allowedOrigins = [
-  "https://onetwoonerental.onrender.com", // naya Render frontend URL
-  "https://onetoonerental.vercel.app",     // purana Vercel URL (rakhna ho to)
-  "http://localhost:3000",
-  "http://localhost:5173", // Vite local dev
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error("Not allowed by CORS: " + origin));
-    },
-    credentials: true,
-  })
-);
-
+// CORS: kept permissive on purpose. This API is public (no cookies — the
+// frontend sends the JWT in an Authorization header), so restricting origin
+// only adds a common source of "works locally, breaks in production" bugs
+// without any real security benefit here.
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -51,6 +35,10 @@ app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
+// Only start a standalone listener when this file is run directly
+// (local dev with `node server.js` / `npm run dev`, or a host like Render/Railway).
+// On Vercel this file is imported as a serverless function handler instead,
+// so app.listen() must NOT run there.
 if (require.main === module) {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
