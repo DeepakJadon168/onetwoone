@@ -11,7 +11,8 @@ const Footer = () => {
           <p className="footer-founders"><b>Co-Founder:</b> Mr. Deepak Singh Jadon</p>
         </div>
         <div className="footer-contact">
-          <p>📞 +91 92946 89832</p>
+          <p>📞 +91 89594 96650 </p>
+          <p>📞 +91 92946 89832 </p>
           <p>✉️ deepakjadon137@gmail.com</p>
           <p>📍 Bhanwarkua Square, Indore, MP</p>
         </div>

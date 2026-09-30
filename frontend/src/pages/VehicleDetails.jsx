@@ -4,8 +4,8 @@ import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 import StarRating from "../components/StarRating";
 
-const SUPPORT_PHONE = "+919294689832";
-const SUPPORT_PHONE_DISPLAY = "+91 92946 89832";
+const SUPPORT_PHONE = "+91 89594 96650";
+const SUPPORT_PHONE_DISPLAY = "+91 89594 96650";
 
 const VehicleDetails = () => {
   const { id } = useParams();
